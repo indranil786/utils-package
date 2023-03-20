@@ -1,5 +1,5 @@
 {
-  "name": "@fastjobs.io/fastjobs-utils",
+  "name": "@fastjobsio/fastjobs-utils",
   "version": "1.0.4",
   "description": "A private utility library for fastjobs.io",
   "main": "dist/index.js",
@@ -53,6 +53,6 @@
     "amqplib": "^0.10.3"
   },
   "publishConfig": {
-    "@FastJobsio:registry": "https://npm.pkg.github.com"
+    "registry": "https://npm.pkg.github.com"
   }
 }
