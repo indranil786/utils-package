@@ -53,6 +53,6 @@
     "amqplib": "^0.10.3"
   },
   "publishConfig": {
-    "@FastJobs.io:registry": "https://npm.pkg.github.com"
+    "@FastJobsio:registry": "https://npm.pkg.github.com"
   }
 }
