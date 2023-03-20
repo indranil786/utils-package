@@ -1,2 +1,3 @@
 import RabbitMq from './utils/mqconfig';
-export { RabbitMq };
+import { ConsumeMessage, Channel } from 'amqplib';
+export { RabbitMq, ConsumeMessage, Channel };

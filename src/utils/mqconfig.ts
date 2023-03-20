@@ -1,4 +1,4 @@
-import client, { Connection, Channel, Message } from 'amqplib';
+import client, { Connection, Channel, ConsumeMessage } from 'amqplib';
 export default class RabbitMq {
   url: string;
   channels: Map<string, Channel>;
@@ -16,6 +16,7 @@ export default class RabbitMq {
       this.connection = await client.connect(
         `amqp://${RABBIT_MQ_USERNAME}:${RABBIT_MQ_PASSWORD}@${this.url}`
       );
+      console.log(`Fastjobs Rabbit Mq Service Started for ${this.url}`);
     } catch (e) {
       console.error(e);
       console.error('Could not connect to RabbitMq');
@@ -61,7 +62,7 @@ export default class RabbitMq {
   //  */
   async consume(
     queue: string,
-    listener: (msg: Message, channel: Channel) => void
+    listener: (msg: ConsumeMessage | null, channel: Channel) => void
   ) {
     // add type here
     const channel = await this.getChannel(queue);
