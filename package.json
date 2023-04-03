@@ -50,6 +50,7 @@
     ]
   },
   "dependencies": {
+    "@aws-sdk/client-ses": "^3.303.0",
     "amqplib": "^0.10.3"
   },
   "publishConfig": {
