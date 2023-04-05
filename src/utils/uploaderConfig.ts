@@ -1,8 +1,5 @@
-import {
-  S3Client,
-  PutObjectCommand,
-  PutObjectCommandOutput,
-} from '@aws-sdk/client-s3';
+import { S3Client } from '@aws-sdk/client-s3';
+import { Upload } from '@aws-sdk/lib-storage';
 import { Readable } from 'stream';
 
 export default class Uploader {
@@ -20,23 +17,24 @@ export default class Uploader {
    * @param {string} key
    * @param {Readable | ReadableStream | Blob | string | Uint8Array | Buffer} body
    * @param {string} mimeType
-   * @returns {Promise<PutObjectCommandOutput>}
+   * @returns {Promise<object>}
    */
   async uploadFile(
     bucketName: string,
     key: string,
     body: Readable | ReadableStream | Blob | string | Uint8Array | Buffer,
     mimeType: string
-  ): Promise<PutObjectCommandOutput> {
-    return await this.s3Client.send(
-      new PutObjectCommand({
+  ): Promise<object> {
+    return await new Upload({
+      client: this.s3Client,
+      params: {
         Bucket: bucketName,
         Key: key,
         Body: body,
         Metadata: {
           'Content-Type': mimeType,
         },
-      })
-    );
+      },
+    }).done();
   }
 }
