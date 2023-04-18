@@ -5,9 +5,13 @@ import { Readable } from 'stream';
 export default class Uploader {
   s3Client: S3Client;
 
-  constructor(region: string) {
+  constructor(region: string, accessKey: string, secretKey: string) {
     this.s3Client = new S3Client({
       region: region,
+      credentials: {
+        accessKeyId: accessKey,
+        secretAccessKey: secretKey,
+      }
     });
   }
 
