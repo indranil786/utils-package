@@ -7,9 +7,13 @@ import {
 export default class Emailer {
   sesClient: SESClient;
 
-  constructor(region: string) {
+  constructor(region: string, accessKey : string, secretKey : string) {
     this.sesClient = new SESClient({
       region: region,
+      credentials: {
+        accessKeyId: accessKey,
+        secretAccessKey: secretKey,
+      }
     });
   }
 
