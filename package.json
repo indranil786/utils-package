@@ -1,6 +1,6 @@
 {
   "name": "@fastjobsio/fastjobs-utils",
-  "version": "1.3.2",
+  "version": "1.3.3",
   "description": "A private utility library for fastjobs.io",
   "main": "dist/index.js",
   "scripts": {
