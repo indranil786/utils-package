@@ -11,7 +11,7 @@ export default class Uploader {
       credentials: {
         accessKeyId: accessKey,
         secretAccessKey: secretKey,
-      }
+      },
     });
   }
 
@@ -40,5 +40,33 @@ export default class Uploader {
         },
       },
     }).done();
+  }
+  async uploadMultiFiles(
+    bucketName: string,
+    fileArray: {
+      name: string;
+      data: Readable | ReadableStream | Blob | string | Uint8Array | Buffer;
+    }[]
+  ): Promise<object> {
+    const uploadedFiles: { [key: string]: string } = {};
+    const uploadPromises = [];
+    for (const file of fileArray) {
+      const upload = new Upload({
+        client: this.s3Client,
+        params: {
+          Bucket: bucketName,
+          Key: file.name,
+          Body: file.data,
+        },
+      });
+      uploadPromises.push(
+        upload.done().then((res: any) => {
+          uploadedFiles[file.name] = res?.Location;
+        })
+      );
+    }
+    await Promise.all(uploadPromises);
+
+    return uploadedFiles;
   }
 }
