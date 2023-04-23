@@ -43,6 +43,7 @@ export default class Uploader {
   }
   async uploadMultiFiles(
     bucketName: string,
+    key: string,
     fileArray: {
       name: string;
       data: Readable | ReadableStream | Blob | string | Uint8Array | Buffer;
@@ -55,7 +56,7 @@ export default class Uploader {
         client: this.s3Client,
         params: {
           Bucket: bucketName,
-          Key: file.name,
+          Key: `${key}/${file.name}`,
           Body: file.data,
         },
       });
