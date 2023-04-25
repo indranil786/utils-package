@@ -49,7 +49,7 @@ export default class Uploader {
       data: Readable | ReadableStream | Blob | string | Uint8Array | Buffer;
     }[]
   ): Promise<{ fileName: string; fileUrl: string }[]> {
-    let uploadedFiles: { fileName: string; fileUrl: string }[];
+    const uploadedFiles: { fileName: string; fileUrl: string }[] = [];
     const uploadPromises = [];
     for (const file of fileArray) {
       const upload = new Upload({
